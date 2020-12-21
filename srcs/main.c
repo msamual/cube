@@ -19,10 +19,11 @@ int		puterror(char *error_message)
 	return (-1);
 }
 
-void	print_map(char **map)
+int		print_map(char **map)
 {
 	while (*map)
 		ft_putendl(*map++);
+	return (0);
 }
 
 int     cube(void *mlx, char *filename)
@@ -38,10 +39,12 @@ int     cube(void *mlx, char *filename)
 	all->win->mlx = mlx;
 	all->win->win = mlx_new_window(mlx, all->resolution->width,
 		all->resolution->height, "Return to castle Wolfestein");
+	all->win->img = mlx_new_image(mlx, all->resolution->width, all->resolution->height);
 	if (scale_map(all, scl) == -1)
 		return (-1);
 	put_map_in_window(all);
-	mlx_loop(mlx);
+	mlx_hook(all->win->win, 2, 1L<<0, key_handle, all);
+	mlx_loop(all->win->mlx);
 
 	return (0);
 }

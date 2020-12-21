@@ -6,7 +6,7 @@
 #    By: msamual <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/10 13:22:36 by msamual           #+#    #+#              #
-#    Updated: 2020/12/10 14:42:55 by msamual          ###   ########.fr        #
+#    Updated: 2020/12/17 18:59:36 by msamual          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = srcs/main.c \
 		srcs/parse_info.c \
 		srcs/init.c \
 		srcs/check_map.c \
-		srcs/put_map_in_window.c
+		srcs/put_map_in_window.c \
+		srcs/key_handle.c 
 
 INC = includes
 

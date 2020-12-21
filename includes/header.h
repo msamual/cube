@@ -18,8 +18,11 @@
 # include "get_next_line.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
+# include <stdio.h>
 
-#define SCALE 32 // условный размер каждого квадратика в карте
+# define SCALE 16 // условный размер каждого квадратика в карте
+# define PI 3.1415926535
 
 typedef struct		s_win //структура для окна
 {
@@ -81,6 +84,7 @@ typedef struct	s_all // структура для всего вместе
 	t_win		*win;
 	t_plr		*plr;
 	char		**map;
+	char		**smap;
 }				t_all;
 
 int		parse(char *filename, t_all *all);
@@ -88,9 +92,10 @@ int     parse_info(t_all *all, t_list **lst);
 int		puterror(char *error_message);
 int     init_all(t_all **all);
 int     check_map(t_all *all);
-void	print_map(char **map);
+int		print_map(char **map);
 void    put_map_in_window(t_all *all);
 int     map_size(char **map);
 int		scale_map(t_all *all, int scl);
+int		key_handle(int keycode, t_all *all);
 
 #endif
