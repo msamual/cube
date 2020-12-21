@@ -1,23 +1,6 @@
 #include "../includes/header.h"
 
-void    draw_ray(t_all *all, float x, float y)
-{
-    int     i;
-    float   d;
-    int     steps;
-
-    steps = fmax((x - all->plr->x), (y - all->plr->y)) - 1;
-    d = (y - all->plr->y) / steps;
-    i = -1;
-    while (++i < steps)
-    {
-        x++;
-        y += d;
-        
-    }
-}
-
-void    ray(t_all *all)
+void    ray(t_all *all, float dir)
 {
     float x;
     float y;
@@ -27,10 +10,25 @@ void    ray(t_all *all)
     while (all->map[(int)y][(int)x] != '1')
     {
         printf("x = %f y = %f\n", x, y);
-        x += (cos(all->plr->dir));
-        y += (sin(all->plr->dir));
+        x += (cos(dir));
+        y += (sin(dir));
         mlx_pixel_put(all->win->mlx, all->win->win, round(x), round(y), 0xbbbbbb);
     }
+}
+
+void    draw_rays(t_all *all)
+{
+    float dstart;
+    float dstop;
+
+    dstart = all->plr->dir - 1.15192 / 2;
+    dstop = dstart + 1.15192;
+    while (dstart < dstop)
+    {
+        dstart += 0.02;
+        ray(all, dstart);
+    }
+
 }
 
 void    put_map_in_window(t_all *all)
@@ -52,7 +50,7 @@ void    put_map_in_window(t_all *all)
     y = all->plr->y;
     x = all->plr->x;
     mlx_pixel_put(all->win->mlx, all->win->win, x, y, 0xbbbbbb);
-    ray(all);
+    draw_rays(all);
 }
 
 char    *scale_line(char *line, int scl)
