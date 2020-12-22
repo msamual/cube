@@ -9,10 +9,9 @@ void    ray(t_all *all, float dir)
     y = all->plr->y;
     while (all->map[(int)y][(int)x] != '1')
     {
-        printf("x = %f y = %f\n", x, y);
         x += (cos(dir));
         y += (sin(dir));
-        mlx_pixel_put(all->win->mlx, all->win->win, round(x), round(y), 0xbbbbbb);
+        pixel_put(all, round(x), round(y), 0xbbbbbb);
     }
 }
 
@@ -21,11 +20,11 @@ void    draw_rays(t_all *all)
     float dstart;
     float dstop;
 
-    dstart = all->plr->dir - 1.15192 / 2;
-    dstop = dstart + 1.15192;
+    dstart = all->plr->dir - PI / 4;
+    dstop = dstart + PI / 2;
     while (dstart < dstop)
     {
-        dstart += 0.02;
+        dstart += 0.005;
         ray(all, dstart);
     }
 
@@ -36,6 +35,10 @@ void    put_map_in_window(t_all *all)
     int x;
     int y;
 
+    all->win->img = mlx_new_image(all->win->mlx, all->resolution->width,
+                                        all->resolution->height);
+	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
+										&all->win->line_l, &all->win->en);
     y = -1;
     while (all->map[++y])
     {
@@ -43,14 +46,15 @@ void    put_map_in_window(t_all *all)
         while (all->map[y][++x])
         {
             if (all->map[y][x] == '1')
-                mlx_pixel_put(all->win->mlx, all->win->win, x, y, 0xffaaff);
+                pixel_put(all, x, y, 0xffaaff);
         }
     }
-
     y = all->plr->y;
     x = all->plr->x;
-    mlx_pixel_put(all->win->mlx, all->win->win, x, y, 0xbbbbbb);
+    pixel_put(all, x, y, 0xbbbbbb);
     draw_rays(all);
+    mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
+    mlx_destroy_image(all->win->mlx, all->win->img);
 }
 
 char    *scale_line(char *line, int scl)

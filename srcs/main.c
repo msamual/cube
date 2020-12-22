@@ -39,7 +39,6 @@ int     cube(void *mlx, char *filename)
 	all->win->mlx = mlx;
 	all->win->win = mlx_new_window(mlx, all->resolution->width,
 		all->resolution->height, "Return to castle Wolfestein");
-	all->win->img = mlx_new_image(mlx, all->resolution->width, all->resolution->height);
 	if (scale_map(all, scl) == -1)
 		return (-1);
 	put_map_in_window(all);

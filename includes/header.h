@@ -21,7 +21,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# define SCALE 16 // условный размер каждого квадратика в карте
+# define SCALE 32 // условный размер каждого квадратика в карте
 # define PI 3.1415926535
 
 typedef struct		s_win //структура для окна
@@ -97,5 +97,6 @@ void    put_map_in_window(t_all *all);
 int     map_size(char **map);
 int		scale_map(t_all *all, int scl);
 int		key_handle(int keycode, t_all *all);
+void    pixel_put(t_all *all, int x, int y, int color);
 
 #endif

@@ -22,7 +22,8 @@ SRCS = srcs/main.c \
 		srcs/init.c \
 		srcs/check_map.c \
 		srcs/put_map_in_window.c \
-		srcs/key_handle.c 
+		srcs/key_handle.c \
+		srcs/pixel_put.c
 
 INC = includes
 

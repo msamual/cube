@@ -45,7 +45,6 @@ void    move_right(t_all *all)
 
 int		key_handle(int keycode, t_all *all)
 {
-    ft_putnbr_fd(all->plr->dir, 1);
     if (keycode == 53)
     	return (quit(all->win));
     if (keycode == 13)
