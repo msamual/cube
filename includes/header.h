@@ -21,7 +21,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# define SCALE 32 // условный размер каждого квадратика в карте
+# define SCALE 64 // условный размер каждого квадратика в карте
 # define PI 3.1415926535
 
 typedef struct		s_win //структура для окна
@@ -45,9 +45,10 @@ typedef struct		s_plr //структура для игрока и луча
 {
 	float			x;
 	float			y;
-	float			dir;
-	float			start;
-	float			end;
+	float			dirx;
+	float			diry;
+	float			plane_x;
+	float			plane_y;
 }					t_plr;
 
 typedef struct		s_res //разрешение окна
@@ -93,10 +94,13 @@ int		puterror(char *error_message);
 int     init_all(t_all **all);
 int     check_map(t_all *all);
 int		print_map(char **map);
-void    put_map_in_window(t_all *all);
 int     map_size(char **map);
 int		scale_map(t_all *all, int scl);
 int		key_handle(int keycode, t_all *all);
 void    pixel_put(t_all *all, int x, int y, int color);
+int     put_map(t_all *all, int scl);
+void		key_handle_arrow(int keycode, t_all *all);
+void    init_player(t_all *all, int posx, int posy);
+int		quit(t_win *win);
 
 #endif

@@ -104,16 +104,7 @@ int     check_map(t_all *all)
         return (-1);
     if (fill_map(copy, posx, posy) == -1)
         return (-1);
-    all->plr->x = posx * SCALE + SCALE/2;
-    all->plr->y = posy * SCALE + SCALE/2;
-    if (all->map[posy][posx] == 'N')
-        all->plr->dir = 3 * PI / 2;
-    if (all->map[posy][posx] == 'E')
-        all->plr->dir = 0;
-    if (all->map[posy][posx] == 'S')
-        all->plr->dir = PI / 2;
-    if (all->map[posy][posx] == 'W')
-        all->plr->dir = PI;
-    all->map[posy][posx] = '0';
+    init_player(all, posx, posy);
+    
     return (0);
 }
