@@ -1,60 +1,38 @@
 #include "../includes/header.h"
 
-void    ray(t_all *all, float dir)
+void    ray(t_all *all, t_vec *dir)
 {
-    float x;
-    float y;
+    t_vec   ray;
+    float   res;
+    float   ddx;
+    float   ddy;
 
-    x = all->plr->x;
-    y = all->plr->y;
-    while (all->map[(int)floor(y)][(int)floor(x)] != '1')
+    res = 0;
+    ray.x = all->plr->pos->x;
+    ray.y = all->plr->pos->y;
+    ddx = fabs(1/dir->x);
+    ddy = fabs(1/dir->y);
+    while (all->map[(int)ray.y][(int)ray.x] != '1')
     {
-        x += (cos(dir)/10);
-        y += (sin(dir)/10);
-        pixel_put(all, x * SCALE, y * SCALE, 0xbbbbbb);
+        add_vector(&ray, dir, 100);
+        pixel_put(all, ray.x * SCALE, ray.y * SCALE, 0xbbbbbb);
     }
 }
 
 void    draw_rays(t_all *all)
 {
-    float dstart;
-    float dstop;
+    int     i;
+    t_vec   start;
 
-    dstart = all->plr->dir - PI / 4;
-    dstop = dstart + PI / 2;
-    while (dstart < dstop)
+    i = 0;
+    sub_three(&start, all->plr->dir, all->plr->plane, 1);
+    while (i < all->resolution->width)
     {
-        dstart += 0.001;
-        ray(all, dstart);
+        ray(all, &start);
+        add_vector(&start, all->plr->plane, all->resolution->width / 2);
+        i++;
     }
-
-}
-
-void    put_map_in_window(t_all *all)
-{
-    int x;
-    int y;
-
-    all->win->img = mlx_new_image(all->win->mlx, all->resolution->width,
-                                        all->resolution->height);
-	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
-										&all->win->line_l, &all->win->en);
-    y = -1;
-    while (all->map[++y])
-    {
-        x = -1;
-        while (all->map[y][++x])
-        {
-            if (all->map[y][x] == '1')
-                pixel_put(all, x, y, 0xffaaff);
-        }
-    }
-    y = all->plr->y;
-    x = all->plr->x;
-    pixel_put(all, x, y, 0xbbbbbb);
-    draw_rays(all);
-    mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
-    mlx_destroy_image(all->win->mlx, all->win->img);
+    //ray(all, all->plr->dir);
 }
 
 void    put_line(t_all *all, char *line, int y, int scl)
@@ -98,7 +76,7 @@ int     put_map(t_all *all, int scl)
             sc = 0;
         }
     }
-    pixel_put(all, all->plr->x * scl, all->plr->y * scl, 0xbbbbbb);
+    pixel_put(all, all->plr->pos->x * scl, all->plr->pos->y * scl, 0xbbbbbb);
     draw_rays(all);
     mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
     mlx_destroy_image(all->win->mlx, all->win->img);

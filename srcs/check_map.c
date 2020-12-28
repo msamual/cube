@@ -96,6 +96,7 @@ int     check_map(t_all *all)
     int     posx;
     int     posy;
     char    **copy;
+    int     i;
 
     copy = NULL;
     if (check_valid_characters(all->map, &posx, &posy) == -1)
@@ -104,7 +105,10 @@ int     check_map(t_all *all)
         return (-1);
     if (fill_map(copy, posx, posy) == -1)
         return (-1);
+    i = -1;
+    while (copy[++i])
+        free(copy[i]);
+    free(copy);
     init_player(all, posx, posy);
-    
     return (0);
 }

@@ -23,6 +23,7 @@
 
 # define SCALE 64 // условный размер каждого квадратика в карте
 # define PI 3.1415926535
+# define ANGLE 1
 
 typedef struct		s_win //структура для окна
 {
@@ -35,20 +36,17 @@ typedef struct		s_win //структура для окна
 	int				en;
 }					t_win;
 
-typedef struct		s_point // структура для точки
+typedef struct		s_vec // структура для точки
 {
-	int				x;
-	int				y;
-}					t_point;
+	float				x;
+	float				y;
+}					t_vec;
 
 typedef struct		s_plr //структура для игрока и луча
 {
-	float			x;
-	float			y;
-	float			dirx;
-	float			diry;
-	float			plane_x;
-	float			plane_y;
+	t_vec			*pos;
+	t_vec			*dir;
+	t_vec			*plane;
 }					t_plr;
 
 typedef struct		s_res //разрешение окна
@@ -85,7 +83,6 @@ typedef struct	s_all // структура для всего вместе
 	t_win		*win;
 	t_plr		*plr;
 	char		**map;
-	char		**smap;
 }				t_all;
 
 int		parse(char *filename, t_all *all);
@@ -99,8 +96,14 @@ int		scale_map(t_all *all, int scl);
 int		key_handle(int keycode, t_all *all);
 void    pixel_put(t_all *all, int x, int y, int color);
 int     put_map(t_all *all, int scl);
-void		key_handle_arrow(int keycode, t_all *all);
+int		key_handle_arrow(int keycode, t_all *all);
 void    init_player(t_all *all, int posx, int posy);
 int		quit(t_win *win);
+void    add_vector(t_vec *v1, t_vec *v2, float q);
+void	sub_vector(t_vec *v1, t_vec *v2, float q);
+void    rotate_right(t_all *all);
+void    rotate_left(t_all *all);
+void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
+void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
 
 #endif

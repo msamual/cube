@@ -19,29 +19,20 @@ int		puterror(char *error_message)
 	return (-1);
 }
 
-int		print_map(char **map)
-{
-	while (*map)
-		ft_putendl(*map++);
-	return (0);
-}
-
 int     cube(void *mlx, char *filename)
 {
 	t_all	*all;
-	int		scl;
 
 	if (init_all(&all) == -1)
 		return (-1);
 	if (parse(filename, all) == -1)
 		return (-1);
-	scl = SCALE;
 	all->win->mlx = mlx;
 	all->win->win = mlx_new_window(mlx, all->resolution->width,
 		all->resolution->height, "Return to castle Wolfestein");
 	put_map(all, SCALE);
 	mlx_hook(all->win->win, 2, 1L<<0, key_handle, all);
-	mlx_hook(all->win->win, 2, 1L<<0, key_handle_arrow, all);
+	//mlx_hook(all->win->win, 2, 1L<<0, key_handle_arrow, all);
 	mlx_loop(all->win->mlx);
 
 	return (0);

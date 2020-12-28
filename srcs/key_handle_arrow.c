@@ -24,10 +24,14 @@ void    rotate_left(t_all *all)
     float x;
     float y;
 
-    x = all->plr->dirx * cos(-0.1) - sin(-0.1) * all->plr->diry;
-    y = all->plr->dirx * sin(-0.1) + cos(-0.1) * all->plr->diry;
-    all->plr->dirx = x;
-    all->plr->diry = y;
+    x = all->plr->dir->x * cos(-0.1) - sin(-0.1) * all->plr->dir->y;
+    y = all->plr->dir->x * sin(-0.1) + cos(-0.1) * all->plr->dir->y;
+    all->plr->dir->x = x;
+    all->plr->dir->y = y;
+    x = all->plr->plane->x * cos(-0.1) - sin(-0.1) * all->plr->plane->y;
+    y = all->plr->plane->x * sin(-0.1) + cos(-0.1) * all->plr->plane->y;
+    all->plr->plane->x = x;
+    all->plr->plane->y = y;
 }
 
 void    rotate_right(t_all *all)
@@ -35,19 +39,12 @@ void    rotate_right(t_all *all)
     float x;
     float y;
 
-    x = all->plr->dirx * cos(0.1) - sin(0.1) * all->plr->diry;
-    y = all->plr->dirx * sin(0.1) + cos(0.1) * all->plr->diry;
-    all->plr->dirx = x;
-    all->plr->diry = y;
-}
-
-void		key_handle_arrow(int keycode, t_all *all)
-{
-    if (keycode == 123)
-        rotate_left(all);
-    if (keycode == 124)
-        rotate_right(all);
-
-    mlx_clear_window(all->win->mlx, all->win->win);
-    put_map(all, SCALE);
+    x = all->plr->dir->x * cos(0.1) - sin(0.1) * all->plr->dir->y;
+    y = all->plr->dir->x * sin(0.1) + cos(0.1) * all->plr->dir->y;
+    all->plr->dir->x = x;
+    all->plr->dir->y = y;
+    x = all->plr->plane->x * cos(0.1) - sin(0.1) * all->plr->plane->y;
+    y = all->plr->plane->x * sin(0.1) + cos(0.1) * all->plr->plane->y;
+    all->plr->plane->x = x;
+    all->plr->plane->y = y;
 }

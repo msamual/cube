@@ -25,7 +25,8 @@ SRCS = srcs/main.c \
 		srcs/key_handle.c \
 		srcs/pixel_put.c \
 		srcs/key_handle_arrow.c \
-		srcs/init_player.c
+		srcs/init_player.c \
+		srcs/vectors.c
 
 INC = includes
 
