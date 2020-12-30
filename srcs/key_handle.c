@@ -15,24 +15,24 @@
 
 void    move_forward(t_all *all)
 {
-        add_vector(all->plr->pos, all->plr->dir, 10);
+        add_vector(all->plr->pos, all->plr->dir, 5);
 }
 
 void    move_back(t_all *all)
 {
-        sub_vector(all->plr->pos, all->plr->dir, 10);
+        sub_vector(all->plr->pos, all->plr->dir, 5);
 }
 
 void    move_left(t_all *all)
 {
-    all->plr->pos->y -= all->plr->dir->x * 10;
-    all->plr->pos->x += all->plr->dir->y * 10;
+    all->plr->pos->y -= all->plr->dir->x * 0.1;
+    all->plr->pos->x += all->plr->dir->y * 0.1;
 }
 
 void    move_right(t_all *all)
 {
-    all->plr->pos->y += all->plr->dir->x * 10;
-    all->plr->pos->x -= all->plr->dir->y * 10;
+    all->plr->pos->y += all->plr->dir->x * 0.1;
+    all->plr->pos->x -= all->plr->dir->y * 0.1;
 }
 
 int		key_handle(int keycode, t_all *all)

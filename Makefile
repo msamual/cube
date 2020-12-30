@@ -48,7 +48,7 @@ $(%.o): $(%.c)
 	$(CC) -o $@ -c $^ -I$(INC)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ -lmlx -framework OPENGL -framework Appkit -lm -Lsrcs/libft -lft -I $(INC)
+	$(CC) -o $@ $^ -L . -lmlx -framework OPENGL -framework Appkit -lm -Lsrcs/libft -lft -I $(INC)
 
 clean:
 	rm -f $(OBJ)

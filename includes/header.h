@@ -21,7 +21,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# define SCALE 64 // условный размер каждого квадратика в карте
+# define SCALE 24 // условный размер каждого квадратика в карте
 # define PI 3.1415926535
 # define ANGLE 1
 
@@ -35,6 +35,20 @@ typedef struct		s_win //структура для окна
 	int				bpp;
 	int				en;
 }					t_win;
+
+typedef struct		s_ray //структура для луча
+{
+	float			x;
+	float			y;
+	float			delta_dist_x;
+	float			delta_dist_y;
+	float			side_dist_x;
+	float			side_dist_y;
+	float			step_x;
+	float			step_y;
+	float			perp;
+}					t_ray;
+
 
 typedef struct		s_vec // структура для точки
 {
@@ -105,5 +119,6 @@ void    rotate_right(t_all *all);
 void    rotate_left(t_all *all);
 void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
 void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
+void    add_vector1(t_vec *v1, t_vec *v2, float q);
 
 #endif

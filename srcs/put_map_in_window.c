@@ -1,27 +1,50 @@
 #include "../includes/header.h"
 
+void    print_first_step(t_ray *ray)
+{
+    
+}
+
+void    first_step(t_ray *ray)
+{
+    if (ray->x > 0)
+    {
+        ray->step_x = 1;
+        ray->side_dist_x = (floor(ray->x) + 1.0 - ray->x) * ray->delta_dist_x;
+    }
+    else
+    {
+        ray->step_x = -1;
+        ray->side_dist_x = (ray->x - floor(ray->x)) * ray->delta_dist_x;
+    }
+    if (ray->y > 0)
+    {
+        ray->step_y = 1;
+        ray->side_dist_y = (floor(ray->y) + 1.0 - ray->y) * ray->delta_dist_y;
+    }
+    else
+    {
+        ray->step_y = -1;
+        ray->side_dist_y = (ray->y - floor(ray->y)) * ray->delta_dist_y;
+    }
+}
+
 void    ray(t_all *all, t_vec *dir)
 {
-    t_vec   ray;
-    float   res;
-    float   ddx;
-    float   ddy;
+    t_ray   ray;
+    t_vec   ray1;
 
-    res = 0;
     ray.x = all->plr->pos->x;
     ray.y = all->plr->pos->y;
-    ddx = fabs(1/dir->x);
-    ddy = fabs(1/dir->y);
-    while (all->map[(int)ray.y][(int)ray.x] != '1')
-    {
-        add_vector(&ray, dir, 100);
-        pixel_put(all, ray.x * SCALE, ray.y * SCALE, 0xbbbbbb);
-    }
+    ray.delta_dist_x = fabs(1 / dir->x);
+    ray.delta_dist_y = fabs(1 / dir->y);
+    first_step(&ray);
+    print_first_step(&ray);
 }
 
 void    draw_rays(t_all *all)
 {
-    int     i;
+    /*int     i;
     t_vec   start;
 
     i = 0;
@@ -31,8 +54,8 @@ void    draw_rays(t_all *all)
         ray(all, &start);
         add_vector(&start, all->plr->plane, all->resolution->width / 2);
         i++;
-    }
-    //ray(all, all->plr->dir);
+    }*/
+    ray(all, all->plr->dir);
 }
 
 void    put_line(t_all *all, char *line, int y, int scl)

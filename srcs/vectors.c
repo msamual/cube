@@ -18,6 +18,12 @@ void    add_vector(t_vec *v1, t_vec *v2, float q)
     v1->y += v2->y / q;
 }
 
+void    add_vector1(t_vec *v1, t_vec *v2, float q)
+{
+    v1->x += v2->x * q;
+    v1->y += v2->y * q;
+}
+
 void    sub_vector(t_vec *v1, t_vec *v2, float q)
 {
     v1->x -= v2->x / q;
