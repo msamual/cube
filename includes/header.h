@@ -38,22 +38,27 @@ typedef struct		s_win //структура для окна
 
 typedef struct		s_ray //структура для луча
 {
-	float			x;
-	float			y;
-	float			delta_dist_x;
-	float			delta_dist_y;
-	float			side_dist_x;
-	float			side_dist_y;
-	float			step_x;
-	float			step_y;
-	float			perp;
+	int				mapx;
+	int				mapy;
+	int				side;
+	double			dirx;
+	double			diry;
+	double			x;
+	double			y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			step_x;
+	double			step_y;
+	double			perp;
 }					t_ray;
 
 
 typedef struct		s_vec // структура для точки
 {
-	float				x;
-	float				y;
+	double				x;
+	double				y;
 }					t_vec;
 
 typedef struct		s_plr //структура для игрока и луча
@@ -113,12 +118,12 @@ int     put_map(t_all *all, int scl);
 int		key_handle_arrow(int keycode, t_all *all);
 void    init_player(t_all *all, int posx, int posy);
 int		quit(t_win *win);
-void    add_vector(t_vec *v1, t_vec *v2, float q);
-void	sub_vector(t_vec *v1, t_vec *v2, float q);
+void    add_vector(t_vec *v1, t_vec *v2, double q);
+void	sub_vector(t_vec *v1, t_vec *v2, double q);
 void    rotate_right(t_all *all);
 void    rotate_left(t_all *all);
-void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
-void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, float q);
-void    add_vector1(t_vec *v1, t_vec *v2, float q);
+void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
+void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
+void    add_vector1(t_vec *v1, t_vec *v2, double q);
 
 #endif

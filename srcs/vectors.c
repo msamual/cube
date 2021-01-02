@@ -12,31 +12,31 @@
 
 #include "../includes/header.h"
 
-void    add_vector(t_vec *v1, t_vec *v2, float q)
+void    add_vector(t_vec *v1, t_vec *v2, double q)
 {
     v1->x += v2->x / q;
     v1->y += v2->y / q;
 }
 
-void    add_vector1(t_vec *v1, t_vec *v2, float q)
+void    add_vector1(t_vec *v1, t_vec *v2, double q)
 {
     v1->x += v2->x * q;
     v1->y += v2->y * q;
 }
 
-void    sub_vector(t_vec *v1, t_vec *v2, float q)
+void    sub_vector(t_vec *v1, t_vec *v2, double q)
 {
     v1->x -= v2->x / q;
     v1->y -= v2->y / q;
 }
 
-void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, float q)
+void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, double q)
 {
     dest->x = (v1->x + v2->x) / q;
     dest->y = (v1->y + v2->y) / q;
 }
 
-void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, float q)
+void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, double q)
 {
     dest->x = (v1->x - v2->x) / q;
     dest->y = (v1->y - v2->y) / q;

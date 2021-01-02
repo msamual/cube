@@ -21,8 +21,8 @@ int    quit(t_win *win)
 
 void    rotate_left(t_all *all)
 {
-    float x;
-    float y;
+    double x;
+    double y;
 
     x = all->plr->dir->x * cos(-0.1) - sin(-0.1) * all->plr->dir->y;
     y = all->plr->dir->x * sin(-0.1) + cos(-0.1) * all->plr->dir->y;
@@ -36,8 +36,8 @@ void    rotate_left(t_all *all)
 
 void    rotate_right(t_all *all)
 {
-    float x;
-    float y;
+    double x;
+    double y;
 
     x = all->plr->dir->x * cos(0.1) - sin(0.1) * all->plr->dir->y;
     y = all->plr->dir->x * sin(0.1) + cos(0.1) * all->plr->dir->y;
