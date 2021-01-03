@@ -52,18 +52,18 @@ void    rotate_right(t_all *all)
 int		key_release(int keycode, t_all *all)
 {
     if (keycode == 53)
-    	return (quit(all->win));
+    	all->move->exit = 0;
     if (keycode == 13)
-        move_forward(all);
+        all->move->forward = 0;
     if (keycode == 1)
-        move_back(all);
+        all->move->back = 0;
     if (keycode == 0)
-        move_left(all);
+        all->move->left = 0;
     if (keycode == 2)
-        move_right(all);
+        all->move->right = 0;
     if (keycode == 123)
-        rotate_left(all);
+        all->move->turn_left = 0;
     if (keycode == 124)
-        rotate_right(all);
+        all->move->turn_right = 0;
     return (0);
 }

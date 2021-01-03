@@ -103,6 +103,21 @@ typedef struct		s_tex //загруженные текстурки
 	t_img			sprite;
 }					t_tex;
 
+typedef struct		s_mov
+{
+	int				forward;
+	int				back;
+	int				left;
+	int				right;
+	int				turn_left;
+	int				turn_right;
+	int				up;
+	int				down;
+	int				exit;
+	double			mouse_left;
+	double			mouse_right;
+}					t_mov;
+
 typedef struct		s_color // цвет пола и потолка
 {
 	unsigned char	fred;
@@ -122,6 +137,7 @@ typedef struct	s_all // структура для всего вместе
 	t_color		*color;
 	t_win		*win;
 	t_plr		*plr;
+	t_mov		*move;
 	char		**map;
 }				t_all;
 
