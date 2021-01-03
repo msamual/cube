@@ -34,18 +34,20 @@ void    print_ray(t_all *all, t_ray *ray)
     }
 }
 
-void    print_dir(t_all *all)
+void    print_dir(t_all *all, int scl)
 {
-    double x;
-    double y;
-
+    double  x;
+    double  y;
+    int     i;
     x = all->plr->pos->x;
     y = all->plr->pos->y;
-    while (all->map[(int)y][(int)x] != '1')
+    pixel_put(all, x * scl, y * scl, 0xff0000);
+    i = -1;
+    while (++i < 10)
     {
-        x += all->plr->dir->x / 30;
-        y += all->plr->dir->y / 30;
-        pixel_put(all, x * SCALE, y * SCALE, 0xbbbbbb);
+        x += all->plr->dir->x / 10;
+        y += all->plr->dir->y / 10;
+        pixel_put(all, x * scl, y * scl, 0xbbbbbb);
     }
 }
 
@@ -99,25 +101,8 @@ void    first_step(t_ray *ray)
 
 void    delta(t_ray *ray)
 {
-    /*if (ray->diry == 0 || ray->dirx == 0)
-    {
-        if (!ray->diry)
-        {
-            ray->delta_dist_x = 0;
-            ray->delta_dist_y = 1;
-        }
-        else
-        {
-            ray->delta_dist_x = 1;
-            ray->delta_dist_y = 0;
-        }
-    }
-    else
-    {*/
         ray->delta_dist_x = sqrt(1 + (ray->diry * ray->diry) / (ray->dirx * ray->dirx));
         ray->delta_dist_y = sqrt(1 + (ray->dirx * ray->dirx) / (ray->diry * ray->diry));
-   // }
-    
 }
 
 void    perp(t_ray *ray)
@@ -126,10 +111,9 @@ void    perp(t_ray *ray)
         ray->perp = (ray->mapx - ray->x + (1 - ray->step_x) / 2) / ray->dirx;
     else
         ray->perp = (ray->mapy - ray->y + (1 - ray->step_y) / 2) / ray->diry;
-     
 }
 
-void    ray(t_all *all, t_vec *dir)
+void    ray(t_all *all, t_vec *dir, int i)
 {
     t_ray   ray;
 
@@ -146,7 +130,8 @@ void    ray(t_all *all, t_vec *dir)
     //print_ray(all, &ray);
     dda(&ray, all);
     perp(&ray);
-    printf("perp = %lf\n", ray.perp);
+    put_vert_line(all, &ray, i);
+    //put_vert_line(all, &ray, i + 1);
     //print_first_step(&ray, all);
 }
 
@@ -159,11 +144,11 @@ void    draw_rays(t_all *all)
     sub_three(&start, all->plr->dir, all->plr->plane, 1);
     while (i < all->resolution->width)
     {
-        ray(all, &start);
+        ray(all, &start, i);
         add_vector(&start, all->plr->plane, all->resolution->width / 2);
         i++;
     }
-    print_dir(all);
+    //print_dir(all);
     //ray(all, all->plr->dir);
 }
 
@@ -191,13 +176,15 @@ int     put_map(t_all *all, int scl)
 {
     int     y;
     int     sc;
-    
+
     all->win->img = mlx_new_image(all->win->mlx, all->resolution->width,
                                         all->resolution->height);
 	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
 										&all->win->line_l, &all->win->en);
     y = 0;
     sc = 0;
+    print_f_c(all);
+    draw_rays(all);
     while (all->map[y])
     {
         put_line(all, all->map[y], y * scl + sc, scl);
@@ -208,9 +195,9 @@ int     put_map(t_all *all, int scl)
             sc = 0;
         }
     }
-    pixel_put(all, all->plr->pos->x * scl, all->plr->pos->y * scl, 0xbbbbbb);
-    draw_rays(all);
+    print_dir(all, scl);
     mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
+    //mlx_put_image_to_window(all->win->mlx, all->win->win, all->textures->north, 0, 0);
     mlx_destroy_image(all->win->mlx, all->win->img);
     return (0);
 }

@@ -25,14 +25,14 @@ void    move_back(t_all *all)
 
 void    move_left(t_all *all)
 {
-    all->plr->pos->y -= all->plr->dir->x * 0.1;
-    all->plr->pos->x += all->plr->dir->y * 0.1;
+    all->plr->pos->y -= all->plr->dir->x * 0.15;
+    all->plr->pos->x += all->plr->dir->y * 0.15;
 }
 
 void    move_right(t_all *all)
 {
-    all->plr->pos->y += all->plr->dir->x * 0.1;
-    all->plr->pos->x -= all->plr->dir->y * 0.1;
+    all->plr->pos->y += all->plr->dir->x * 0.15;
+    all->plr->pos->x -= all->plr->dir->y * 0.15;
 }
 
 int		key_handle(int keycode, t_all *all)
@@ -51,7 +51,12 @@ int		key_handle(int keycode, t_all *all)
         rotate_left(all);
     if (keycode == 124)
         rotate_right(all);
-    mlx_clear_window(all->win->mlx, all->win->win);
-    put_map(all, SCALE);
+    return (0);
+}
+
+int     to_window(t_all **all)
+{
+    mlx_clear_window((*all)->win->mlx, (*all)->win->win);
+    put_map((*all), 16);
     return (0);
 }

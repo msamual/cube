@@ -21,7 +21,7 @@
 # include <math.h>
 # include <stdio.h>
 
-# define SCALE 24 // условный размер каждого квадратика в карте
+# define SCALE 64 // условный размер каждого квадратика в карте
 # define PI 3.1415926535
 # define ANGLE 1
 
@@ -74,13 +74,33 @@ typedef struct		s_res //разрешение окна
 	int				height;
 }					t_res;
 
-typedef struct		s_tex //текстурки
+typedef struct		s_texp //текстурки
 {
 	char			*north;
 	char			*west;
 	char			*south;
 	char			*east;
 	char			*sprite;
+}					t_texp;
+
+typedef struct		s_img
+{
+	void			*img;
+	int				width;
+	int				height;
+	int				bpp;
+	int				size_line;
+	int				en;
+	int				*addr;
+}					t_img;
+
+typedef struct		s_tex //загруженные текстурки
+{
+	t_img			north;
+	t_img			west;
+	t_img			south;
+	t_img			east;
+	t_img			sprite;
 }					t_tex;
 
 typedef struct		s_color // цвет пола и потолка
@@ -97,6 +117,7 @@ typedef struct		s_color // цвет пола и потолка
 typedef struct	s_all // структура для всего вместе
 {
 	t_res		*resolution;
+	t_texp		*path;
 	t_tex		*textures;
 	t_color		*color;
 	t_win		*win;
@@ -125,5 +146,14 @@ void    rotate_left(t_all *all);
 void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
 void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
 void    add_vector1(t_vec *v1, t_vec *v2, double q);
+void	put_vert_line(t_all *all, t_ray *ray, int i);
+void    print_f_c(t_all *all);
+int		load_textures(t_all *all);
+int		key_release(int keycode, t_all *all);
+void    move_forward(t_all *all);
+void    move_back(t_all *all);
+void    move_left(t_all *all);
+void    move_right(t_all *all);
+int     to_window(t_all **all);
 
 #endif

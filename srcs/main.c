@@ -30,9 +30,12 @@ int     cube(void *mlx, char *filename)
 	all->win->mlx = mlx;
 	all->win->win = mlx_new_window(mlx, all->resolution->width,
 		all->resolution->height, "Return to castle Wolfestein");
-	put_map(all, SCALE);
+	//if (load_textures(all) == -1)
+	//	return (-1);
+	put_map(all, 16);
 	mlx_hook(all->win->win, 2, 1L<<0, key_handle, all);
-	//mlx_hook(all->win->win, 2, 1L<<0, key_handle_arrow, all);
+	mlx_hook(all->win->win, 3, 10, key_release, all);
+	mlx_loop_hook(all->win->mlx, to_window, &all);
 	mlx_loop(all->win->mlx);
 
 	return (0);

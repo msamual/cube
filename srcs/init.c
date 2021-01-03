@@ -23,9 +23,11 @@ int     init_all(t_all **all)
     (*all)->plr->pos = (t_vec *)ft_calloc(1, sizeof(t_vec));
     (*all)->plr->dir = (t_vec *)ft_calloc(1, sizeof(t_vec));
     (*all)->plr->plane = (t_vec *)ft_calloc(1, sizeof(t_vec));
+    (*all)->path = (t_texp *)ft_calloc(1, sizeof(t_texp));
     if (!(*all) || !(*all)->resolution || !(*all)->textures ||
         !(*all)->win || !(*all)->plr || !(*all)->color ||
-        !(*all)->plr->pos || !(*all)->plr->dir || !(*all)->plr->plane)
+        !(*all)->plr->pos || !(*all)->plr->dir || !(*all)->plr->plane ||
+        !(*all)->path)
         return (puterror("allocation error in init_all"));
     return (0);
 }

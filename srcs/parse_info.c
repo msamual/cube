@@ -35,15 +35,15 @@ int     parse_textures(char *str, t_all *all, int code)
     if ((ft_strlen(str) < 4) || ((ft_strlen(str) < 3 && code == 5)))
 		return (puterror("invalid texture path"));
 	if (code == 1)
-		all->textures->north = ft_strdup(str + 4);
+		all->path->north = ft_strdup(str + 3);
 	if (code == 2)
-		all->textures->west = ft_strdup(str + 4);
+		all->path->west = ft_strdup(str + 3);
 	if (code == 3)
-		all->textures->east = ft_strdup(str + 4);
+		all->path->east = ft_strdup(str + 3);
 	if (code == 4)
-		all->textures->south = ft_strdup(str + 4);
+		all->path->south = ft_strdup(str + 3);
 	if (code == 5)
-		all->textures->sprite = ft_strdup(str + 3);
+		all->path->sprite = ft_strdup(str + 2);
 	return (1);
 }
 

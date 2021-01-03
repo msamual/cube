@@ -48,3 +48,22 @@ void    rotate_right(t_all *all)
     all->plr->plane->x = x;
     all->plr->plane->y = y;
 }
+
+int		key_release(int keycode, t_all *all)
+{
+    if (keycode == 53)
+    	return (quit(all->win));
+    if (keycode == 13)
+        move_forward(all);
+    if (keycode == 1)
+        move_back(all);
+    if (keycode == 0)
+        move_left(all);
+    if (keycode == 2)
+        move_right(all);
+    if (keycode == 123)
+        rotate_left(all);
+    if (keycode == 124)
+        rotate_right(all);
+    return (0);
+}

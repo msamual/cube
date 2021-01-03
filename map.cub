@@ -1,12 +1,12 @@
-R 1024 700
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+R 1920 1080
+NO ./srcs/textures/21.xpm
+SO ./srcs/textures/21.xpm
+WE ./srcs/textures/21.xpm
+EA ./srcs/textures/21.xpm
 
 S ./path_to_the_sprite_texture
-F 220,100,0
-C 225,30,0
+C 0,0,25
+F 40,0,0
          11111111111111111111111
         1000000000110000000000001
         1011000001110000002000001
