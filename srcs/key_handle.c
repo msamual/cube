@@ -15,28 +15,64 @@
 
 void    move_forward(t_all *all)
 {
-        add_vector(all->plr->pos, all->plr->dir, 15);
+    double x;
+    double y;
+
+    x = all->plr->pos->x + all->plr->dir->x * 0.01 * SPEED;
+    y = all->plr->pos->y + all->plr->dir->y * 0.01 * SPEED;
+    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
+        all->plr->pos->x = x;
+    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
+        all->plr->pos->y = y;
 }
 
 void    move_back(t_all *all)
 {
-        sub_vector(all->plr->pos, all->plr->dir, 15);
+    double x;
+    double y;
+
+    x = all->plr->pos->x - all->plr->dir->x * 0.01 * SPEED;
+    y = all->plr->pos->y - all->plr->dir->y * 0.01 * SPEED;
+    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
+        all->plr->pos->x = x;
+    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
+        all->plr->pos->y = y;
 }
 
 void    move_left(t_all *all)
 {
-    all->plr->pos->y -= all->plr->dir->x * 0.10;
-    all->plr->pos->x += all->plr->dir->y * 0.10;
+    double x;
+    double y;
+
+    x = all->plr->pos->x + all->plr->dir->y * 0.01 * SPEED;
+    y = all->plr->pos->y - all->plr->dir->x * 0.01 * SPEED;
+    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
+        all->plr->pos->x = x;
+    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
+        all->plr->pos->y = y;
 }
 
 void    move_right(t_all *all)
 {
-    all->plr->pos->y += all->plr->dir->x * 0.10;
-    all->plr->pos->x -= all->plr->dir->y * 0.10;
+    double x;
+    double y;
+
+    x = all->plr->pos->x - all->plr->dir->y * 0.01 * SPEED;
+    y = all->plr->pos->y + all->plr->dir->x * 0.01 * SPEED;
+    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
+        all->plr->pos->x = x;
+    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
+        all->plr->pos->y = y;
 }
 
 int		key_handle(int keycode, t_all *all)
 {
+    if (keycode == 126)
+        all->move->up = 1;
+    if (keycode == 125)
+        all->move->down = 1;
+    if (keycode == 257)
+        all->move->run = 1;
     if (keycode == 53)
     	all->move->exit = 1;
     if (keycode == 13)
@@ -70,12 +106,18 @@ int    move(t_all *all)
         rotate_left(all);
     if (all->move->turn_right)
         rotate_right(all);
+    if (all->move->up)
+        all->plr->view += 10;
+    if (all->move->down)
+        all->plr->view -= 10;
     return (0);
 }
 
 int     to_window(t_all **all)
 {
     move(*all);
+    if ((*all)->move->run)
+        move((*all));
     mlx_clear_window((*all)->win->mlx, (*all)->win->win);
     put_map((*all), 16);
     return (0);

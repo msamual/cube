@@ -22,7 +22,7 @@ void    print_f_c(t_all *all)
     y = 0;
     flor = all->color->fred * 65536 + all->color->fgreen * 256 + all->color->fblue;
     ceiling = all->color->cred * 65536 + all->color->cgreen * 256 + all->color->cblue;
-    while (y < all->resolution->height / 2)
+    while (y < all->resolution->height / 2 + all->plr->view && y < all->resolution->height)
     {
         x = 0;
         while (x < all->resolution->width)
@@ -46,10 +46,10 @@ void    put_vert_line(t_all *all, t_ray *ray, int i)
     int     color;
     
     height = (int)(all->resolution->height / ray->perp);
-    start = -height / 2 + all->resolution->height / 2;
+    start = -height / 2 + all->resolution->height / 2 + all->plr->view;
     if (start < 0)
         start = 0;
-    end = height / 2 + all->resolution->height / 2;
+    end = height / 2 + all->resolution->height / 2 + all->plr->view;
     if (end >= all->resolution->height)
         end = all->resolution->height - 1;
     if (ray->side && ray->diry > 0) /* Южная сторона */
@@ -64,6 +64,5 @@ void    put_vert_line(t_all *all, t_ray *ray, int i)
     {
         pixel_put(all, i, start, color);
         start++;
-    }
-    
+    }   
 }

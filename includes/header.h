@@ -21,9 +21,10 @@
 # include <math.h>
 # include <stdio.h>
 
-# define SCALE 64 // условный размер каждого квадратика в карте
+# define SCALE 64
 # define PI 3.1415926535
 # define ANGLE 1
+# define SPEED 3.5
 
 typedef struct		s_win //структура для окна
 {
@@ -66,6 +67,7 @@ typedef struct		s_plr //структура для игрока и луча
 	t_vec			*pos;
 	t_vec			*dir;
 	t_vec			*plane;
+	int				view;
 }					t_plr;
 
 typedef struct		s_res //разрешение окна
@@ -105,6 +107,7 @@ typedef struct		s_tex //загруженные текстурки
 
 typedef struct		s_mov
 {
+	int				run;
 	int				forward;
 	int				back;
 	int				left;
@@ -171,5 +174,6 @@ void    move_back(t_all *all);
 void    move_left(t_all *all);
 void    move_right(t_all *all);
 int     to_window(t_all **all);
+void    print_crist(t_all *all);
 
 #endif

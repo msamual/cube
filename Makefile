@@ -28,7 +28,8 @@ SRCS = srcs/main.c \
 		srcs/init_player.c \
 		srcs/vectors.c \
 		srcs/put_vert_line.c \
-		srcs/texture.c
+		srcs/texture.c \
+		srcs/print_tools.c
 
 INC = includes
 

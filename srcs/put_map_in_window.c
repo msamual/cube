@@ -196,6 +196,7 @@ int     put_map(t_all *all, int scl)
         }
     }
     print_dir(all, scl);
+    print_crist(all);
     mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
     //mlx_put_image_to_window(all->win->mlx, all->win->win, all->textures->north, 0, 0);
     mlx_destroy_image(all->win->mlx, all->win->img);
