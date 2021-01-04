@@ -53,6 +53,7 @@ typedef struct		s_ray //структура для луча
 	double			step_x;
 	double			step_y;
 	double			perp;
+	double			wallx;
 }					t_ray;
 
 
@@ -131,6 +132,13 @@ typedef struct		s_color // цвет пола и потолка
 	unsigned char	cblue;
 }					t_color;
 
+typedef struct		s_line
+{
+	int				height;
+	int				start;
+	int				end;
+	int				i;
+}					t_line;
 
 typedef struct	s_all // структура для всего вместе
 {

@@ -1,4 +1,4 @@
-R 1024 768
+R 1600 900
 NO ./srcs/textures/21.xpm
 SO ./srcs/textures/21.xpm
 WE ./srcs/textures/21.xpm

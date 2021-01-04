@@ -126,13 +126,14 @@ void    ray(t_all *all, t_vec *dir, int i)
     ray.diry = dir->y;
     delta(&ray);
     first_step(&ray);
-    //print_first_step(&ray, all);
-    //print_ray(all, &ray);
     dda(&ray, all);
     perp(&ray);
+    if (ray.side == 0)
+        ray.wallx = ray.y + ray.perp * ray.diry;
+    else
+        ray.wallx = ray.x + ray.perp * ray.dirx;
+    ray.wallx -= floor(ray.wallx);
     put_vert_line(all, &ray, i);
-    //put_vert_line(all, &ray, i + 1);
-    //print_first_step(&ray, all);
 }
 
 void    draw_rays(t_all *all)
@@ -148,8 +149,6 @@ void    draw_rays(t_all *all)
         add_vector(&start, all->plr->plane, all->resolution->width / 2);
         i++;
     }
-    //print_dir(all);
-    //ray(all, all->plr->dir);
 }
 
 void    put_line(t_all *all, char *line, int y, int scl)
@@ -198,7 +197,7 @@ int     put_map(t_all *all, int scl)
     print_dir(all, scl);
     print_crist(all);
     mlx_put_image_to_window(all->win->mlx, all->win->win, all->win->img, 0, 0);
-    //mlx_put_image_to_window(all->win->mlx, all->win->win, all->textures->north, 0, 0);
+    //mlx_put_image_to_window(all->win->mlx, all->win->win, all->textures->north.img, 0, 0);
     mlx_destroy_image(all->win->mlx, all->win->img);
     return (0);
 }

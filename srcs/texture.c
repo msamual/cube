@@ -26,6 +26,5 @@ int    load_textures(t_all *all)
                                                 &all->textures->north.size_line,
                                                 &all->textures->north.en);
     all->textures->north.addr = addr;
-    printf("%x\n", addr[780]);
     return (0);
 }
