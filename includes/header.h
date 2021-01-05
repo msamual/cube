@@ -24,7 +24,7 @@
 # define SCALE 64
 # define PI 3.1415926535
 # define ANGLE 1
-# define SPEED 3.5
+# define SPEED 5
 
 typedef struct		s_win //структура для окна
 {

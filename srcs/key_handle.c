@@ -119,6 +119,6 @@ int     to_window(t_all **all)
     if ((*all)->move->run)
         move((*all));
     mlx_clear_window((*all)->win->mlx, (*all)->win->win);
-    put_map((*all), 16);
+    put_map((*all), (*all)->resolution->width / 200);
     return (0);
 }

@@ -46,7 +46,7 @@ void    print_line(t_all *all, t_img tex, t_line line, t_ray *ray)
     double  j;
 
     step = 1.0 * tex.height / line.height;
-    j = 0;
+    j = (line.start - all->resolution->height / 2 + line.height / 2 - all->plr->view) * step;
     x = (int)(ray->wallx * tex.width);
     if (ray->side == 0 && ray->dirx < 0)
         x = tex.width - x - 1;
@@ -54,7 +54,7 @@ void    print_line(t_all *all, t_img tex, t_line line, t_ray *ray)
         x = tex.width - x - 1;
     while (line.start < line.end)
     {
-        color = tex.addr[(int)j * tex.width + x];
+        color = tex.addr[(int)round(j) * (tex.width) + x];
         pixel_put(all, line.i, line.start, color);
         line.start++;
         j += step;
@@ -74,11 +74,11 @@ void    put_vert_line(t_all *all, t_ray *ray, int i)
     if (line.end >= all->resolution->height)
         line.end = all->resolution->height - 1;
     if (ray->side && ray->diry > 0) /* Южная сторона */
-        print_line(all, all->textures->north, line, ray);
+        print_line(all, all->textures->south, line, ray);
     if (ray->side && ray->diry <= 0) /* Северная сторона */
         print_line(all, all->textures->north, line, ray);
     if (!ray->side && ray->dirx > 0) /* запад */
-        print_line(all, all->textures->north, line, ray);
+        print_line(all, all->textures->west, line, ray);
     if (!ray->side && ray->dirx <= 0) /* Восток */
-        print_line(all, all->textures->north, line, ray);
+        print_line(all, all->textures->east, line, ray);
 }
