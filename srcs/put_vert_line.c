@@ -38,6 +38,16 @@ void    print_f_c(t_all *all)
     }
 }
 
+int     get_color(t_img tex, double j, int x)
+{
+    char    *img;
+    int     color;
+
+    img = tex.addr;
+    color = *(int *)(img + (tex.width * 4 * (int)j) + x * 4);
+    return (color);
+}
+
 void    print_line(t_all *all, t_img tex, t_line line, t_ray *ray)
 {
     double  step;
@@ -54,7 +64,7 @@ void    print_line(t_all *all, t_img tex, t_line line, t_ray *ray)
         x = tex.width - x - 1;
     while (line.start < line.end)
     {
-        color = tex.addr[(int)round(j) * (tex.width) + x];
+        color = get_color(tex, j, x);
         pixel_put(all, line.i, line.start, color);
         line.start++;
         j += step;

@@ -1,8 +1,8 @@
 R 1600 900
-NO ./srcs/textures/crete_floor2.xpm
-SO ./srcs/textures/21.xpm
-WE ./srcs/textures/21.xpm
-EA ./srcs/textures/21.xpm
+NO ./srcs/textures/hex.png
+SO ./srcs/textures/greystone.xpm
+WE ./srcs/textures/mossy.xpm
+EA ./srcs/textures/redbrick.xpm
 
 S ./srcs/textures/21.xpm
 C 0,0,25

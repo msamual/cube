@@ -94,7 +94,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				en;
-	int				*addr;
+	char			*addr;
 }					t_img;
 
 typedef struct		s_tex //загруженные текстурки

@@ -32,8 +32,8 @@ int     cube(void *mlx, char *filename)
 		all->resolution->height, "Return to castle Wolfestein");
 	if (load_textures(all) == -1)
 		return (-1);
-	printf("height = %d width = %d\n", all->textures->west.height, all->textures->west.width);
-	printf("height = %d width = %d\n", all->textures->north.height, all->textures->north.width);
+	//printf("height = %d width = %d\n", all->textures->west.height, all->textures->west.width);
+	//printf("height = %d width = %d\n", all->textures->north.height, all->textures->north.width);
 	put_map(all, all->resolution->width / 200);
 	mlx_hook(all->win->win, 2, 1L<<0, key_handle, all);
 	mlx_hook(all->win->win, 3, 10, key_release, all);
