@@ -26,7 +26,7 @@
 # define ANGLE 1
 # define SPEED 5
 
-typedef struct		s_win //структура для окна
+typedef struct		s_win
 {
 	void			*mlx;
 	void			*win;
@@ -37,7 +37,7 @@ typedef struct		s_win //структура для окна
 	int				en;
 }					t_win;
 
-typedef struct		s_ray //структура для луча
+typedef struct		s_ray
 {
 	int				mapx;
 	int				mapy;
@@ -56,14 +56,13 @@ typedef struct		s_ray //структура для луча
 	double			wallx;
 }					t_ray;
 
-
-typedef struct		s_vec // структура для точки
+typedef struct		s_vec
 {
 	double				x;
 	double				y;
 }					t_vec;
 
-typedef struct		s_plr //структура для игрока и луча
+typedef struct		s_plr
 {
 	t_vec			*pos;
 	t_vec			*dir;
@@ -71,13 +70,13 @@ typedef struct		s_plr //структура для игрока и луча
 	int				view;
 }					t_plr;
 
-typedef struct		s_res //разрешение окна
+typedef struct		s_res
 {
 	int				width;
 	int				height;
 }					t_res;
 
-typedef struct		s_texp //текстурки
+typedef struct		s_texp
 {
 	char			*north;
 	char			*west;
@@ -97,7 +96,7 @@ typedef struct		s_img
 	char			*addr;
 }					t_img;
 
-typedef struct		s_tex //загруженные текстурки
+typedef struct		s_tex
 {
 	t_img			north;
 	t_img			west;
@@ -122,7 +121,7 @@ typedef struct		s_mov
 	double			mouse_right;
 }					t_mov;
 
-typedef struct		s_color // цвет пола и потолка
+typedef struct		s_color
 {
 	unsigned char	fred;
 	unsigned char	fgreen;
@@ -132,6 +131,13 @@ typedef struct		s_color // цвет пола и потолка
 	unsigned char	cblue;
 }					t_color;
 
+typedef struct		s_sprite
+{
+	t_vec			pos;
+	double			dist;
+}					t_sprite;
+
+
 typedef struct		s_line
 {
 	int				height;
@@ -140,48 +146,62 @@ typedef struct		s_line
 	int				i;
 }					t_line;
 
-typedef struct	s_all // структура для всего вместе
+typedef struct		s_all
 {
-	t_res		*resolution;
-	t_texp		*path;
-	t_tex		*textures;
-	t_color		*color;
-	t_win		*win;
-	t_plr		*plr;
-	t_mov		*move;
-	char		**map;
-}				t_all;
+	double			*z_buffer;
+	t_list			*sprites;
+	t_res			*resolution;
+	t_texp			*path;
+	t_tex			*textures;
+	t_color			*color;
+	t_win			*win;
+	t_plr			*plr;
+	t_mov			*move;
+	char			**map;
+}					t_all;
 
-int		parse(char *filename, t_all *all);
-int     parse_info(t_all *all, t_list **lst);
-int		puterror(char *error_message);
-int     init_all(t_all **all);
-int     check_map(t_all *all);
-int		print_map(char **map);
-int     map_size(char **map);
-int		scale_map(t_all *all, int scl);
-int		key_handle(int keycode, t_all *all);
-void    pixel_put(t_all *all, int x, int y, int color);
-int     put_map(t_all *all, int scl);
-int		key_handle_arrow(int keycode, t_all *all);
-void    init_player(t_all *all, int posx, int posy);
-int		quit(t_win *win);
-void    add_vector(t_vec *v1, t_vec *v2, double q);
-void	sub_vector(t_vec *v1, t_vec *v2, double q);
-void    rotate_right(t_all *all);
-void    rotate_left(t_all *all);
-void    add_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
-void    sub_three(t_vec *dest, t_vec *v1, t_vec * v2, double q);
-void    add_vector1(t_vec *v1, t_vec *v2, double q);
-void	put_vert_line(t_all *all, t_ray *ray, int i);
-void    print_f_c(t_all *all);
-int		load_textures(t_all *all);
-int		key_release(int keycode, t_all *all);
-void    move_forward(t_all *all);
-void    move_back(t_all *all);
-void    move_left(t_all *all);
-void    move_right(t_all *all);
-int     to_window(t_all **all);
-void    print_crist(t_all *all);
+int					parse(char *filename, t_all *all);
+int					parse_info(t_all *all, t_list **lst);
+int					puterror(char *error_message);
+int					init_all(t_all **all);
+int					check_map(t_all *all);
+int					print_map(char **map);
+int					map_size(char **map);
+int					scale_map(t_all *all, int scl);
+int					key_handle(int keycode, t_all *all);
+void				pixel_put(t_all *all, int x, int y, int color);
+int					put_map(t_all *all, int scl);
+int					key_handle_arrow(int keycode, t_all *all);
+void				init_player(t_all *all, int posx, int posy);
+int					quit(t_win *win);
+void				add_vector(t_vec *v1, t_vec *v2, double q);
+void				sub_vector(t_vec *v1, t_vec *v2, double q);
+void				rotate_right(t_all *all);
+void				rotate_left(t_all *all);
+void				add_three(t_vec *dest, t_vec *v1, t_vec *v2, double q);
+void				sub_three(t_vec *dest, t_vec *v1, t_vec *v2, double q);
+void				add_vector1(t_vec *v1, t_vec *v2, double q);
+void				put_vert_line(t_all *all, t_ray *ray, int i);
+void				print_f_c(t_all *all);
+int					load_textures(t_all *all);
+int					key_release(int keycode, t_all *all);
+void				move_forward(t_all *all);
+void				move_back(t_all *all);
+void				move_left(t_all *all);
+void				move_right(t_all *all);
+int					to_window(t_all **all);
+void				print_crist(t_all *all);
+int					mouse_handle(t_all *all);
+int					move(t_all *all);
+void				draw_rays(t_all *all);
+void				dda(t_ray *ray, t_all *all);
+void				init_sprites(t_all *all);
+void				sprites(t_all *all);
+int					load_sprite(t_all *all);
+int					load_north(t_all *all);
+int					load_east(t_all *all);
+int					load_south(t_all *all);
+int					load_west(t_all *all);
+void				draw_sprites(t_all *all);
 
 #endif

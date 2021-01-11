@@ -96,12 +96,3 @@ int    load_sprite(t_all *all)
     all->textures->sprite.addr = addr;
     return (0);
 }
-
-int     load_textures(t_all *all)
-{
-    
-    if (load_north(all) || load_west(all) || load_south(all)
-    || load_east(all) || load_sprite(all))
-        return (-1);
-    return (0);
-}

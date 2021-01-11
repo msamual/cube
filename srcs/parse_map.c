@@ -43,5 +43,8 @@ int		parse(char *filename, t_all *all)
 		return (-1);
 	if (!(all->map = make_map(head, ft_list_size(head))))
 		return (-1);
+	init_sprites(all);
+	if (!(all->z_buffer = ft_calloc(all->resolution->width, sizeof(double))))
+		return (puterror("allocation failed for z_buffer"));
 	return (check_map(all));
 }

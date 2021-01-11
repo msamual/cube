@@ -14,6 +14,7 @@
 
 int    quit(t_win *win)
 {
+    ft_putendl("EXITING");
     mlx_destroy_window(win->mlx, win->win);
     exit(0);
     return (0);

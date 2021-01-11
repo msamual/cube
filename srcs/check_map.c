@@ -44,10 +44,8 @@ int     check_valid_characters(char **map, int *posx, int *posy)
             }
         }
     }
-    if (player_count > 1)
-        return (puterror("player not alone"));
-    if (!player_count)
-        return (puterror("there is no player on the map"));
+    if (player_count != 1)
+        return (puterror("there is no player on the map, or player is not alone"));
     return (0);
 }
 
@@ -55,7 +53,7 @@ int     copy_map(char **map, char ***copy)
 {
     int     i;
     int     j;
-    char **res;
+    char    **res;
 
     if (!(res = (char **)ft_calloc(map_size(map) + 1, sizeof(char *))))
         return (puterror("allocation error in copy_map"));
@@ -110,5 +108,6 @@ int     check_map(t_all *all)
         free(copy[i]);
     free(copy);
     init_player(all, posx, posy);
+    init_sprites(all);
     return (0);
 }

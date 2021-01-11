@@ -23,6 +23,8 @@ int     parse_resolution(char *str, t_all *all)
         return (puterror("invalid resolution"));
     all->resolution->width = ft_atoi(args[1]);
     all->resolution->height = ft_atoi(args[2]);
+    if (all->resolution->width < 200 || all->resolution->height < 150)
+        return (puterror("very small resolution"));
     i = -1;
     while (args[++i])
         free(args[i]);

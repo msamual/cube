@@ -15,7 +15,10 @@
 int     init_all(t_all **all)
 {
     (*all) = (t_all *)ft_calloc(1, sizeof(t_all));
+    (*all)->sprites = NULL;
     (*all)->resolution = (t_res *)ft_calloc(1, sizeof(t_res));
+    (*all)->resolution->width = 640;
+    (*all)->resolution->height = 480;
     (*all)->textures = (t_tex *)ft_calloc(1, sizeof(t_tex));
     (*all)->color = (t_color *)ft_calloc(1, sizeof(t_color));
     (*all)->win = (t_win *)ft_calloc(1, sizeof(t_win));

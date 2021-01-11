@@ -11,9 +11,9 @@ void    print_crist(t_all *all)
     i = -1;
     while (++i < 20)
         if (i < 8 || i > 12)
-            pixel_put(all, x + i, all->resolution->height / 2, 0x777777);
+            pixel_put(all, x + i, all->resolution->height / 2, 0xaaaaaa);
     i = -1;
     while (++i < 20)
         if (i < 8 || i > 12)
-            pixel_put(all, all->resolution->width / 2, y + i, 0x777777);
+            pixel_put(all, all->resolution->width / 2, y + i, 0xaaaaaa);
 }

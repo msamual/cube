@@ -12,59 +12,6 @@
 
 #include "../includes/header.h"
 
-
-void    move_forward(t_all *all)
-{
-    double x;
-    double y;
-
-    x = all->plr->pos->x + all->plr->dir->x * 0.01 * SPEED;
-    y = all->plr->pos->y + all->plr->dir->y * 0.01 * SPEED;
-    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
-        all->plr->pos->x = x;
-    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
-        all->plr->pos->y = y;
-}
-
-void    move_back(t_all *all)
-{
-    double x;
-    double y;
-
-    x = all->plr->pos->x - all->plr->dir->x * 0.01 * SPEED;
-    y = all->plr->pos->y - all->plr->dir->y * 0.01 * SPEED;
-    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
-        all->plr->pos->x = x;
-    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
-        all->plr->pos->y = y;
-}
-
-void    move_left(t_all *all)
-{
-    double x;
-    double y;
-
-    x = all->plr->pos->x + all->plr->dir->y * 0.01 * SPEED;
-    y = all->plr->pos->y - all->plr->dir->x * 0.01 * SPEED;
-    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
-        all->plr->pos->x = x;
-    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
-        all->plr->pos->y = y;
-}
-
-void    move_right(t_all *all)
-{
-    double x;
-    double y;
-
-    x = all->plr->pos->x - all->plr->dir->y * 0.01 * SPEED;
-    y = all->plr->pos->y + all->plr->dir->x * 0.01 * SPEED;
-    if (all->map[(int)all->plr->pos->y][(int)x] != '1')
-        all->plr->pos->x = x;
-    if (all->map[(int)y][(int)all->plr->pos->x] != '1')
-        all->plr->pos->y = y;
-}
-
 int		key_handle(int keycode, t_all *all)
 {
     if (keycode == 126)
@@ -90,35 +37,20 @@ int		key_handle(int keycode, t_all *all)
     return (0);
 }
 
-int    move(t_all *all)
-{
-    if (all->move->exit)
-        return (quit(all->win->win));
-    if (all->move->forward)
-        move_forward(all);
-    if (all->move->back)
-        move_back(all);
-    if (all->move->left)
-        move_left(all);
-    if (all->move->right)
-        move_right(all);
-    if (all->move->turn_left)
-        rotate_left(all);
-    if (all->move->turn_right)
-        rotate_right(all);
-    if (all->move->up)
-        all->plr->view += 10;
-    if (all->move->down)
-        all->plr->view -= 10;
-    return (0);
-}
-
 int     to_window(t_all **all)
 {
+    (*all)->win->img = mlx_new_image((*all)->win->mlx, (*all)->resolution->width,
+                                    (*all)->resolution->height);
+	(*all)->win->addr = mlx_get_data_addr((*all)->win->img, &(*all)->win->bpp,
+										&(*all)->win->line_l, &(*all)->win->en);
+    mouse_handle(*all);
     move(*all);
     if ((*all)->move->run)
-        move((*all));
+        move(*all);
     mlx_clear_window((*all)->win->mlx, (*all)->win->win);
     put_map((*all), (*all)->resolution->width / 200);
+    sprites(*all);
+    mlx_put_image_to_window((*all)->win->mlx, (*all)->win->win, (*all)->win->img, 0, 0);
+    mlx_destroy_image((*all)->win->mlx, (*all)->win->img);
     return (0);
 }
