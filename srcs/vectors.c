@@ -18,10 +18,14 @@ void    add_vector(t_vec *v1, t_vec *v2, double q)
     v1->y += v2->y / q;
 }
 
-void    add_vector1(t_vec *v1, t_vec *v2, double q)
+double  mul_scl(t_vec v1, t_vec v2, double q)
 {
-    v1->x += v2->x * q;
-    v1->y += v2->y * q;
+    double tmp;
+
+    tmp = v2.x;
+    v2.x = v2.y;
+    v2.y = -tmp;
+    return ((v1.x * v2.x + v1.y * v2.y) * q);
 }
 
 void    sub_vector(t_vec *v1, t_vec *v2, double q)

@@ -34,11 +34,9 @@ void	init_sprites(t_all *all)
 		while (all->map[y][x])
 		{
 			if (all->map[y][x] == '2')
-			{
-				all->map[y][x] = '0';
 				add_sprite(all, x + 0.5, y + 0.5);
-			}
 			x++;
+
 		}
 		y++;
 	}
@@ -57,7 +55,7 @@ void	get_dist(t_all *all)
 		sprite = (t_sprite *)lst->data;
 		x = fabs(sprite->pos.x - all->plr->pos->x);
 		y = fabs(sprite->pos.y - all->plr->pos->y);
-		sprite->dist = fabs(sqrt(x * x + y * y));
+		sprite->dist = hypot(x, y);
 		lst = lst->next;
 	}
 }

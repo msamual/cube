@@ -108,6 +108,6 @@ int     check_map(t_all *all)
         free(copy[i]);
     free(copy);
     init_player(all, posx, posy);
-    init_sprites(all);
+    //init_sprites(all);
     return (0);
 }

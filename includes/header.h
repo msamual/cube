@@ -141,9 +141,10 @@ typedef struct		s_sprite
 typedef struct		s_line
 {
 	int				height;
+	int				width;
 	int				start;
 	int				end;
-	int				i;
+	double			i;
 }					t_line;
 
 typedef struct		s_all
@@ -203,5 +204,6 @@ int					load_east(t_all *all);
 int					load_south(t_all *all);
 int					load_west(t_all *all);
 void				draw_sprites(t_all *all);
+double				mul_scl(t_vec v1, t_vec v2, double q);
 
 #endif
