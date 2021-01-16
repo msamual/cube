@@ -6,7 +6,7 @@
 /*   By: msamual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:40:56 by msamual           #+#    #+#             */
-/*   Updated: 2020/12/14 14:51:59 by msamual          ###   ########.fr       */
+/*   Updated: 2021/01/13 21:21:08 by msamual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define FT_ULONG_MAX	((unsigned long)(~0L))
 # define FT_LONG_MAX	((long)(FT_ULONG_MAX >> 1))
 # define FT_LONG_MIN	((long)(~FT_LONG_MAX))
+
+int					g_error_code;
 
 typedef struct		s_list
 {
@@ -78,12 +80,15 @@ void				ft_list_clear(t_list **begin_list);
 t_list				*ft_list_at(t_list *begin_list, unsigned int nbr);
 void				ft_list_reverse(t_list **begin_list);
 void				ft_list_foreach(t_list *begin_list, void (*f)());
-void				ft_list_foreach_if(t_list *begin_list, void (*f)(void *), void
-						*data_ref, int (*cmp)(void *, void *));
-t_list				*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)());
-void				ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+void				ft_list_foreach_if(t_list *begin_list, void (*f)(void *),
+								void *data_ref, int (*cmp)(void *, void *));
+t_list				*ft_list_find(t_list *begin_list,
+								void *data_ref, int (*cmp)());
+void				ft_list_remove_if(t_list **begin_list, void *data_ref,
+								int (*cmp)());
 void				ft_list_merge(t_list **begin_list1, t_list *begin_list2);
-void				ft_list_sort(t_list **begin_list, int (*cmp)());
+void				ft_list_sort(t_list **begin_list,
+								int (*cmp)(void *, void *));
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
@@ -95,6 +100,5 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
-
 
 #endif

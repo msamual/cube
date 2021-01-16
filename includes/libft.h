@@ -6,7 +6,7 @@
 /*   By: msamual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:40:56 by msamual           #+#    #+#             */
-/*   Updated: 2020/12/14 14:51:59 by msamual          ###   ########.fr       */
+/*   Updated: 2021/01/13 21:21:38 by msamual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ t_list				*ft_list_find(t_list *begin_list,
 void				ft_list_remove_if(t_list **begin_list, void *data_ref,
 								int (*cmp)());
 void				ft_list_merge(t_list **begin_list1, t_list *begin_list2);
-void				ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *));
+void				ft_list_sort(t_list **begin_list,
+								int (*cmp)(void *, void *));
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);

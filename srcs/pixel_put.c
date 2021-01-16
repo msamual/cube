@@ -5,17 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: msamual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 11:42:25 by msamual           #+#    #+#             */
-/*   Updated: 2020/12/22 11:42:28 by msamual          ###   ########.fr       */
+/*   Created: 2021/01/13 21:33:17 by msamual           #+#    #+#             */
+/*   Updated: 2021/01/13 21:33:32 by msamual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-void    pixel_put(t_all *all, int x, int y, int color)
+void	pixel_put(t_all *all, int x, int y, int color)
 {
-    int *adr;
+	char	*adr;
+	int		*img;
 
-    adr = all->win->addr;
-    adr[(y * all->resolution->width) + x] = color;
+	adr = (char *)all->win->addr;
+	img = (int *)(adr + y * all->win->line_l + x * 4);
+	*img = color;
 }

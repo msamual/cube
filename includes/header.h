@@ -123,18 +123,22 @@ typedef struct		s_mov
 
 typedef struct		s_color
 {
-	unsigned char	fred;
-	unsigned char	fgreen;
-	unsigned char	fblue;
-	unsigned char	cred;
-	unsigned char	cgreen;
-	unsigned char	cblue;
+	int				fred;
+	int				fgreen;
+	int				fblue;
+	int				cred;
+	int				cgreen;
+	int				cblue;
+	int				floor;
+	int				ceiling;
 }					t_color;
 
 typedef struct		s_sprite
 {
 	t_vec			pos;
 	double			dist;
+	double			transx;
+	double			transy;
 }					t_sprite;
 
 
@@ -177,8 +181,7 @@ void				init_player(t_all *all, int posx, int posy);
 int					quit(t_win *win);
 void				add_vector(t_vec *v1, t_vec *v2, double q);
 void				sub_vector(t_vec *v1, t_vec *v2, double q);
-void				rotate_right(t_all *all);
-void				rotate_left(t_all *all);
+void				rotate(t_all *all, double angle);
 void				add_three(t_vec *dest, t_vec *v1, t_vec *v2, double q);
 void				sub_three(t_vec *dest, t_vec *v1, t_vec *v2, double q);
 void				add_vector1(t_vec *v1, t_vec *v2, double q);
@@ -204,6 +207,14 @@ int					load_east(t_all *all);
 int					load_south(t_all *all);
 int					load_west(t_all *all);
 void				draw_sprites(t_all *all);
-double				mul_scl(t_vec v1, t_vec v2, double q);
+double				mul_scl(t_vec v1, t_vec v2);
+void				turn_vector(t_vec *vec, double angle);
+void				print_sprite(t_all *all, int i, t_sprite *sprite);
+void				print_line_sprite(t_all *all, int i, t_line line,
+									t_sprite *sprite);
+int					check_color(t_all *all);
+void				clear_color(char ***color);
+void				draw(t_all **all);
+void				header_bmp(t_all *all, int fd);
 
 #endif

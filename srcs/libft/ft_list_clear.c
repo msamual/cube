@@ -16,6 +16,8 @@ void	ft_list_clear(t_list **begin_list)
 {
 	if (*begin_list && (*begin_list)->next)
 		ft_list_clear(&(*begin_list)->next);
+	if ((*begin_list)->data)
+		free((*begin_list)->data);
 	free(*begin_list);
 	*begin_list = NULL;
 }
