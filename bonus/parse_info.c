@@ -19,12 +19,11 @@ int		parse_resolution(char *str, t_all *all)
 
 	if (!(args = ft_split(str, ' ')))
 		return (puterror("allocation error, resolution"));
-	if (!args[1] || !args[2])
+	if (!args[1] || !args[2] || !ft_isnumber(args[1]) || !ft_isnumber(args[2])
+		|| args[3])
 		return (puterror("invalid resolution"));
 	all->resolution->width = ft_atoi(args[1]);
 	all->resolution->height = ft_atoi(args[2]);
-	if (all->resolution->width < 200 || all->resolution->height < 150)
-		return (puterror("very small resolution"));
 	i = -1;
 	while (args[++i])
 		free(args[i]);
@@ -37,15 +36,15 @@ int		parse_textures(char *str, t_all *all, int code)
 	if ((ft_strlen(str) < 4) || ((ft_strlen(str) < 3 && code == 5)))
 		return (puterror("invalid texture path"));
 	if (code == 1)
-		all->path->north = ft_strdup(str + 3);
+		return (path_tex(&all->path->north, str + 3));
 	if (code == 2)
-		all->path->west = ft_strdup(str + 3);
+		return (path_tex(&all->path->west, str + 3));
 	if (code == 3)
-		all->path->east = ft_strdup(str + 3);
+		return (path_tex(&all->path->east, str + 3));
 	if (code == 4)
-		all->path->south = ft_strdup(str + 3);
+		return (path_tex(&all->path->south, str + 3));
 	if (code == 5)
-		all->path->sprite = ft_strdup(str + 2);
+		return (path_tex(&all->path->sprite, str + 2));
 	return (1);
 }
 
@@ -55,7 +54,9 @@ int		parse_color(char *str, t_all *all, int code)
 
 	if (!(color = ft_split(str, ',')))
 		return (puterror("allocation error, color"));
-	if (!color[0] || !color[1] || !color[2] || color[3])
+	if (!color[0] || !color[1] || !color[2] || color[3]
+		|| !ft_isnumber(color[0]) || !ft_isnumber(color[1])
+		|| !ft_isnumber(color[2]))
 		return (puterror("invalid color"));
 	if (code == 1)
 	{
@@ -105,6 +106,8 @@ int		parse_info(t_all *all, t_list **lst)
 	int		x;
 	int		y;
 
+	if (check_duplicate(*lst) == -1)
+		return (-1);
 	while ((*lst) && (i = (find((*lst)->data, all))))
 	{
 		if (i == -1)

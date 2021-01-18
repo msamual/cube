@@ -29,7 +29,7 @@ void	print_line_sprite(t_all *all, int i, t_line line, t_sprite *sprite)
 		{
 			color = (int)img[(int)(j) *
 				all->textures->sprite.width + (int)line.i];
-			if (color != 0)
+			if (color != 0 && i > 0)
 				pixel_put(all, i, line.start, color);
 			line.start++;
 			j += step;
@@ -59,7 +59,8 @@ void	print_sprite(t_all *all, int i, t_sprite *sprite)
 	j = line.width;
 	while (j--)
 	{
-		print_line_sprite(all, i++, line, sprite);
+		if (i < all->resolution->width)
+			print_line_sprite(all, i++, line, sprite);
 		line.i += step;
 	}
 }

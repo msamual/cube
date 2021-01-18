@@ -6,7 +6,7 @@
 /*   By: msamual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 21:31:31 by msamual           #+#    #+#             */
-/*   Updated: 2021/01/13 21:32:52 by msamual          ###   ########.fr       */
+/*   Updated: 2021/01/18 18:15:49 by msamual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ char	**make_map(t_list *tmp, int size)
 	return (map);
 }
 
+void	init_image(t_all *all)
+{
+	all->win->img = mlx_new_image(all->win->mlx,
+			all->resolution->width, all->resolution->height);
+	all->win->addr = mlx_get_data_addr(all->win->img, &all->win->bpp,
+									&all->win->line_l, &all->win->en);
+	all->scl = get_scale(all);
+}
+
 int		parse(char *filename, t_all *all)
 {
 	int		fd;
@@ -44,13 +53,14 @@ int		parse(char *filename, t_all *all)
 		return (puterror("Can't open file map"));
 	while (get_next_line(fd, &line))
 		ft_list_push_back(&head, line);
+	ft_list_push_back(&head, line);
+	close(fd);
 	lst = head;
 	if (parse_info(all, &head) == -1)
 		return (-1);
 	if (!(all->map = make_map(head, ft_list_size(head))))
 		return (-1);
 	ft_list_clear(&lst);
-	free(line);
 	init_sprites(all);
 	if (!(all->z_buffer = ft_calloc(all->resolution->width, sizeof(double))))
 		return (puterror("allocation failed for z_buffer"));

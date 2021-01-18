@@ -44,6 +44,7 @@ int		cube(char *filename, int save)
 	all->win->mlx = mlx;
 	all->win->win = mlx_new_window(mlx, all->resolution->width,
 		all->resolution->height, "Return to castle Wolfestein");
+	init_image(all);
 	if (load_textures(all) == -1)
 		return (-1);
 	draw(&all);

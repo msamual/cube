@@ -62,4 +62,5 @@ void	init_player(t_all *all, int posx, int posy)
 	}
 	init_plane(all, posx, posy);
 	all->map[posy][posx] = '0';
+	rotate(all, 0.0000001);
 }

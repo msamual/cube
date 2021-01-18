@@ -6,7 +6,7 @@
 /*   By: msamual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:40:56 by msamual           #+#    #+#             */
-/*   Updated: 2021/01/13 21:21:38 by msamual          ###   ########.fr       */
+/*   Updated: 2021/01/18 16:21:31 by msamual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
+int					ft_isnumber(char *str);
 
 #endif

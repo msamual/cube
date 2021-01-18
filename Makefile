@@ -67,7 +67,8 @@ SRC_BONUS = bonus/main.c \
 		bonus/draw_sprites.c \
 		bonus/vectors1.c \
 		bonus/print_sprite.c \
-		bonus/bmp.c
+		bonus/bmp.c \
+		bonus/port.c
 
 INC = includes/header.h \
 		includes/get_next_line.h \

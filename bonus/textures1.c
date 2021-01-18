@@ -33,6 +33,41 @@ int		check_color(t_all *all)
 	return (1);
 }
 
+int		path_tex(char **tex, char *path)
+{
+	if (*tex == NULL)
+		*tex = ft_strdup(path);
+	else
+		return (puterror("duplicate path to texture"));
+	return (1);
+}
+
+int		check_duplicate(t_list *lst)
+{
+	int		r;
+	int		c;
+	int		f;
+	char	*str;
+
+	r = 0;
+	c = 0;
+	f = 0;
+	while (lst)
+	{
+		str = lst->data;
+		if (*str == 'R')
+			r++;
+		if (*str == 'C')
+			c++;
+		if (*str == 'F')
+			f++;
+		lst = lst->next;
+	}
+	if (r > 1 || f > 1 || c > 1)
+		return (puterror("duplicate params"));
+	return (0);
+}
+
 void	clear_color(char ***color)
 {
 	char **ptr;

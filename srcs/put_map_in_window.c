@@ -59,7 +59,8 @@ int		put_map(t_all *all, int scl)
 	sc = 0;
 	print_f_c(all);
 	draw_rays(all);
-	while (all->map[y])
+	sprites(all);
+	while (all->map[y] && scl)
 	{
 		put_line(all, all->map[y], y * scl + sc, scl);
 		sc++;

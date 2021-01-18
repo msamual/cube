@@ -66,7 +66,7 @@ int		sprite_cmp(void *s1, void *s2)
 
 	a = (t_sprite *)s1;
 	b = (t_sprite *)s2;
-	if (a->dist > b->dist)
+	if (a->dist >= b->dist)
 		return (0);
 	return (1);
 }

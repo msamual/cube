@@ -19,6 +19,12 @@ void	move_forward(t_all *all)
 
 	x = all->plr->pos->x + all->plr->dir->x * 0.01 * SPEED;
 	y = all->plr->pos->y + all->plr->dir->y * 0.01 * SPEED;
+	if ((int)x == all->port->in.x && (int)y == all->port->in.y)
+	{
+		x = (double)all->port->out.x + 1.5;
+		y = (double)all->port->out.y + 1.5;
+		change(all);
+	}
 	if (!ft_strchr("12", all->map[(int)all->plr->pos->y][(int)x]))
 		all->plr->pos->x = x;
 	if (!ft_strchr("12", all->map[(int)y][(int)all->plr->pos->x]))
@@ -32,6 +38,12 @@ void	move_back(t_all *all)
 
 	x = all->plr->pos->x - all->plr->dir->x * 0.01 * SPEED;
 	y = all->plr->pos->y - all->plr->dir->y * 0.01 * SPEED;
+	if ((int)x == all->port->in.x && (int)y == all->port->in.y)
+	{
+		x = (double)all->port->out.x + 1.5;
+		y = (double)all->port->out.y + 1.5;
+		change(all);
+	}
 	if (!ft_strchr("12", all->map[(int)all->plr->pos->y][(int)x]))
 		all->plr->pos->x = x;
 	if (!ft_strchr("12", all->map[(int)y][(int)all->plr->pos->x]))
@@ -45,6 +57,12 @@ void	move_left(t_all *all)
 
 	x = all->plr->pos->x + all->plr->dir->y * 0.01 * SPEED;
 	y = all->plr->pos->y - all->plr->dir->x * 0.01 * SPEED;
+	if ((int)x == all->port->in.x && (int)y == all->port->in.y)
+	{
+		x = (double)all->port->out.x + 1.5;
+		y = (double)all->port->out.y + 1.5;
+		change(all);
+	}
 	if (!ft_strchr("12", all->map[(int)all->plr->pos->y][(int)x]))
 		all->plr->pos->x = x;
 	if (!ft_strchr("12", all->map[(int)y][(int)all->plr->pos->x]))
@@ -58,6 +76,12 @@ void	move_right(t_all *all)
 
 	x = all->plr->pos->x - all->plr->dir->y * 0.01 * SPEED;
 	y = all->plr->pos->y + all->plr->dir->x * 0.01 * SPEED;
+	if ((int)x == all->port->in.x && (int)y == all->port->in.y)
+	{
+		x = (double)all->port->out.x + 1.5;
+		y = (double)all->port->out.y + 1.5;
+		change(all);
+	}
 	if (!ft_strchr("12", all->map[(int)all->plr->pos->y][(int)x]))
 		all->plr->pos->x = x;
 	if (!ft_strchr("12", all->map[(int)y][(int)all->plr->pos->x]))

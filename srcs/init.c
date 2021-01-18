@@ -29,6 +29,7 @@ int		init_all(t_all **all)
 	(*all)->path = (t_texp *)ft_calloc(1, sizeof(t_texp));
 	(*all)->move = (t_mov *)ft_calloc(1, sizeof(t_mov));
 	(*all)->plr->view = 0;
+	(*all)->port = (t_port *)ft_calloc(1, sizeof(t_port));
 	if (!(*all) || !(*all)->resolution || !(*all)->textures ||
 		!(*all)->win || !(*all)->plr || !(*all)->color ||
 		!(*all)->plr->pos || !(*all)->plr->dir || !(*all)->plr->plane ||

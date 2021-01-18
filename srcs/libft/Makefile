@@ -12,7 +12,7 @@ ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_create_elem.c ft_list_push_back.c \
 ft_list_push_front.c ft_list_size.c ft_list_last.c ft_list_push_params.c \
 ft_list_clear.c ft_list_at.c ft_list_reverse.c ft_list_foreach.c \
 ft_list_foreach_if.c ft_list_find.c ft_list_remove_if.c ft_list_merge.c \
-ft_list_sort.c ft_putstr.c ft_putendl.c
+ft_list_sort.c ft_putstr.c ft_putendl.c ft_is_number.c
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re

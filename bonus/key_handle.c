@@ -37,19 +37,42 @@ int		key_handle(int keycode, t_all *all)
 	return (0);
 }
 
+int		get_scale(t_all *all)
+{
+	int		y;
+	int		x;
+	int		scl;
+	int		maxx;
+
+	y = 0;
+	scl = all->resolution->width / 150;
+	while (all->map[y])
+		y++;
+	while (scl * y >= all->resolution->height)
+		scl *= 0.9;
+	y = 0;
+	maxx = 0;
+	while (all->map[y])
+	{
+		x = 0;
+		while (all->map[y][x])
+			x++;
+		if (x > maxx)
+			maxx = x;
+		y++;
+	}
+	while (scl * maxx >= all->resolution->width)
+		scl *= 0.9;
+	return (scl);
+}
+
 void	draw(t_all **all)
 {
-	(*all)->win->img = mlx_new_image((*all)->win->mlx,
-			(*all)->resolution->width, (*all)->resolution->height);
-	(*all)->win->addr = mlx_get_data_addr((*all)->win->img, &(*all)->win->bpp,
-										&(*all)->win->line_l, &(*all)->win->en);
-	mlx_clear_window((*all)->win->mlx, (*all)->win->win);
-	put_map((*all), (*all)->resolution->width / 200);
-	sprites(*all);
+	put_map((*all), (*all)->scl);
 	print_crist(*all);
 	mlx_put_image_to_window((*all)->win->mlx, (*all)->win->win,
 										(*all)->win->img, 0, 0);
-	mlx_destroy_image((*all)->win->mlx, (*all)->win->img);
+	mlx_do_sync((*all)->win->mlx);
 }
 
 int		to_window(t_all **all)

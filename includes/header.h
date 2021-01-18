@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 
 # define SCALE 64
 # define PI 3.1415926535
@@ -61,6 +60,13 @@ typedef struct		s_vec
 	double				x;
 	double				y;
 }					t_vec;
+
+typedef struct		s_vect
+{
+	int				x;
+	int				y;
+}					t_vect;
+
 
 typedef struct		s_plr
 {
@@ -151,8 +157,16 @@ typedef struct		s_line
 	double			i;
 }					t_line;
 
+typedef struct		s_port
+{
+	t_vect			in;
+	t_vect			out;
+}					t_port;
+
+
 typedef struct		s_all
 {
+	int				scl;
 	double			*z_buffer;
 	t_list			*sprites;
 	t_res			*resolution;
@@ -162,6 +176,7 @@ typedef struct		s_all
 	t_win			*win;
 	t_plr			*plr;
 	t_mov			*move;
+	t_port			*port;
 	char			**map;
 }					t_all;
 
@@ -216,5 +231,11 @@ int					check_color(t_all *all);
 void				clear_color(char ***color);
 void				draw(t_all **all);
 void				header_bmp(t_all *all, int fd);
+void				port(t_all *all);
+void				change(t_all *all);
+void				init_image(t_all *all);
+int					path_tex(char **tex, char *path);
+int					check_duplicate(t_list *lst);
+int					get_scale(t_all *all);
 
 #endif

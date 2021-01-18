@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/header.h"
+#include <stdio.h>
 
 int		map_size(char **map)
 {
@@ -34,7 +35,7 @@ int		check_valid_characters(char **map, int *posx, int *posy)
 		pos[1] = -1;
 		while (map[pos[0]][++pos[1]])
 		{
-			if (!ft_strchr(" 012NWSE", map[pos[0]][pos[1]]))
+			if (!ft_strchr(" 01245NWSE", map[pos[0]][pos[1]]))
 				return (puterror("invalid symbol on map"));
 			if (ft_strchr("NWSE", map[pos[0]][pos[1]]))
 			{
@@ -78,7 +79,7 @@ int		copy_map(char **map, char ***copy)
 
 int		fill_map(char **map, int x, int y)
 {
-	if (!map[y] || !map[y][x] || !ft_strchr("0123WESN", map[y][x]))
+	if (!map[y] || !map[y][x] || !ft_strchr("012345WESN", map[y][x]))
 		return (puterror("invalid map"));
 	if (map[y][x] == '3' || map[y][x] == '1')
 		return (0);

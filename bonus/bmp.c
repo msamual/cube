@@ -28,7 +28,7 @@ void	bmp_data(t_all *all, int fd)
 			buf[i++] = (((unsigned char *)all->win->addr + end)[j++]);
 		end -= all->win->line_l;
 	}
-	write(fd, buffer, all->resolution->width * all->resolution->height * 4);
+	write(fd, buf, all->resolution->width * all->resolution->height * 4);
 }
 
 void	header_bmp(t_all *all, int fd)
